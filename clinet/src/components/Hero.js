@@ -13,7 +13,7 @@ const Hero = () => {
             <CategoryNav />
           </div>
           {/* main slider */}
-          <div className="w-full max-w-lg lg:max-w-3xl mx-auto bg-pink-200">
+          <div className="w-full max-w-lg lg:max-w-3xl mx-auto ">
             <MainSlider />
           </div>
           {/* promos */}
@@ -21,16 +21,39 @@ const Hero = () => {
             {/* promo 1 */}
             <div className="grad flex-1 h-60 rounded-lg overflow-hidden relative p-6">
               {/* text */}
-              <div>text</div>
+              <div className="flex flex-col max-w-[144px] h-full justify-center">
+                <div className="text-xl uppercase leading-tight font-medium mb-4">
+                  save 35% all dslr cameras
+                </div>
+                <a href="#" className="text-accent uppercase">
+                  Shop now
+                </a>
+              </div>
               {/* image */}
               <img
-                className="absolute z-20 -top-2"
+                className="absolute z-20 -top-2 -right-4"
                 src={PromImg1}
                 alt="card_image"
               />
             </div>
             {/* promo 2 */}
-            <div>PromImg2</div>
+            <div className="grad flex-1 h-60 rounded-lg overflow-hidden relative p-6">
+              {/* text */}
+              <div className="flex flex-col max-w-[144px] h-full justify-center">
+                <div className="text-xl uppercase leading-tight font-medium mb-4">
+                  save 25% all mirrorless cameras
+                </div>
+                <a href="#" className="text-accent uppercase">
+                  Shop now
+                </a>
+              </div>
+              {/* image */}
+              <img
+                className="absolute z-20 top-4 -right-6"
+                src={PromImg2}
+                alt="card_image"
+              />
+            </div>
           </div>
         </div>
       </div>

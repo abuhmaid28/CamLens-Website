@@ -12,7 +12,6 @@ import { Pagination, Navigation } from "swiper";
 import Product from "../components/Product";
 
 const ProductSlider = ({ data }) => {
-  console.log(data);
   return (
     <Swiper
       modules={[Pagination, Navigation]}
@@ -39,7 +38,7 @@ const ProductSlider = ({ data }) => {
       pagination={{
         clickable: true,
       }}
-      className="productSlider mx-auto max-w-sm md:max-w-lg xl:max-w-screen-xl"
+      className="productSlider mx-auto max-w-[360px] md:max-w-lg xl:max-w-[1410px]"
     >
       <>
         {/* loop through products and render them */}
