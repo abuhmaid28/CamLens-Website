@@ -23,7 +23,7 @@ const Hero = () => {
               {/* text */}
               <div className="flex flex-col max-w-[144px] h-full justify-center">
                 <div className="text-xl uppercase leading-tight font-medium mb-4">
-                  save 35% all dslr cameras
+                  save 10% all dslr cameras
                 </div>
                 <a href="#" className="text-accent uppercase">
                   Shop now
@@ -41,7 +41,7 @@ const Hero = () => {
               {/* text */}
               <div className="flex flex-col max-w-[144px] h-full justify-center">
                 <div className="text-xl uppercase leading-tight font-medium mb-4">
-                  save 25% all mirrorless cameras
+                  save 5% all mirrorless cameras
                 </div>
                 <a href="#" className="text-accent uppercase">
                   Shop now

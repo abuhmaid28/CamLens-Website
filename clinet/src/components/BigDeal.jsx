@@ -1,19 +1,39 @@
 import React from "react";
 import ProductSlider from "./ProductSlider";
 import useFetch from "../hooks/useFetch";
+import { calculatePrice } from "./PriceUtils";
 
-const LatestProducts = () => {
-  // get new products
+const BigDeal = () => {
+  // get all products
   const { data } = useFetch("/products?populate=*&filters[isNew]=false");
+
+  // Apply your condition here to filter the data
+  const filteredData = data.filter((product) => {
+    const categoryTitle =
+      product.attributes.categories.data[0].attributes.title;
+    const cameraTitle = product.attributes.title;
+    const cameraPrice = product.attributes.price;
+
+    const calculatedPrice = calculatePrice(
+      cameraTitle,
+      categoryTitle,
+      cameraPrice
+    );
+
+    // Exclude products that are isNew and have the same calculatedPrice as cameraPrice
+    return !(product.attributes.isNew && calculatedPrice === cameraPrice);
+  });
 
   return (
     <div className="mb-16">
       <div className="container mx-auto">
-        <h2 className="h2 mb-6 text-center xl:text-left">Big Deal</h2>
+        <h2 className="h2 mb-6 text-center xl:text-left text-accent">
+          Big Deal
+        </h2>
       </div>
-      <ProductSlider data={data} />
+      <ProductSlider data={filteredData} />
     </div>
   );
 };
 
-export default LatestProducts;
+export default BigDeal;

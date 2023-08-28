@@ -1,25 +1,13 @@
 import React, { useContext } from "react";
-// icons
-import {
-  IoArrowForward,
-  IoCafeOutline,
-  IoCartOutline,
-  IoClose,
-} from "react-icons/io5";
-// context
+import { IoArrowForward, IoClose, IoCartOutline } from "react-icons/io5";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
-
-// stripe import
-
 import { loadStripe } from "@stripe/stripe-js";
 import { request } from "../request";
+
 const Cart = () => {
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
-
-  const stripePromise = loadStripe(
-    "pk_test_51Nih4jJsuIt7aQPp0Um8mRhHUzsyXHLzQvhqwcfMRed1Y0iKBXJVvmWCacXgjVYc99SDdOFzAY3LBchMHm09BK6R00jtppncyX"
-  );
+  const stripePromise = loadStripe("your_stripe_public_key");
 
   const handlePayment = async () => {
     try {

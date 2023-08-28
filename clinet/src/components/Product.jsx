@@ -1,20 +1,28 @@
 import React from "react";
-// link
 import { Link } from "react-router-dom";
-const Product = ({ product }) => {
+import { calculatePrice } from "./PriceUtils";
+
+const Product = ({ product, showStrikethrough }) => {
+  const categoryTitle = product.attributes.categories.data[0].attributes.title;
+  const cameraTitle = product.attributes.title;
+  const cameraPrice = product.attributes.price;
+
+  // Calculate the discounted price using the calculatePrice function
+  const calculatedPrice = calculatePrice(
+    cameraTitle,
+    categoryTitle,
+    cameraPrice
+  );
+
   return (
     <Link to={`/product/${product.id}`}>
       <div className="group grad w-full h-96 rounded-lg overflow-hidden relative">
-        {/* badge */}
-        {product.attributes.isNew ? (
-          <div className="absolute bg-accent text-primary text-xs font-extrabold uppercase top-4  right-4 px-2 rounded-full z-10">
+        {product.attributes.isNew && (
+          <div className="absolute bg-accent text-primary text-xs font-extrabold uppercase top-4 right-4 px-2 rounded-full z-10">
             new
           </div>
-        ) : (
-          ""
         )}
 
-        {/* Image */}
         <div className="w-full h-52 flex items-center justify-center relative">
           <img
             className="w-40 h-40 group-hover:scale-90 transition-all"
@@ -22,31 +30,21 @@ const Product = ({ product }) => {
             alt="Product-img"
           />
         </div>
-        {/* text */}
-        <div className="px-6 pb-8 flex flex-col">
-          {/* category title */}
-          <div className="text-sm text-accent capitalize mb-2">
-            {product.attributes.categories.data[0].attributes.title}
-          </div>
-          {/* category title */}
-          <div className="text-sm mb-4 lg:mb-9">
-            {product.attributes.title.substring(0, 35)}...
-          </div>
-          {/* category price */}
 
-          {product.attributes.isNew ? (
-            <p className="text-lg text-accent">$ {product.attributes.price}</p>
-          ) : (
-            <p className="text-lg text-accent">
-              $
-              {Math.round(
-                product.attributes.price - product.attributes.price * 0.3
-              )}
-              <span className="line-through text-sm ms-2">
-                $ {product.attributes.price}
-              </span>
-            </p>
-          )}
+        <div className="px-6 pb-8 flex flex-col">
+          <div className="text-sm text-accent capitalize mb-2">
+            {categoryTitle}
+          </div>
+          <div className="text-sm mb-4 lg:mb-9">
+            {cameraTitle.substring(0, 35)}...
+          </div>
+          <p className="text-lg text-accent">
+            {/* Display calculated price */}${calculatedPrice}
+            {/* Display original price with a strikethrough if requested */}
+            {showStrikethrough && (
+              <span className="line-through text-sm ms-2">${cameraPrice}</span>
+            )}
+          </p>
         </div>
       </div>
     </Link>

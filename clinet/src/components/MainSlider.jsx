@@ -18,9 +18,9 @@ const sliderData = [
   {
     img: CameraImg,
     preTitle: "special offer",
-    titlePart1: "save 20%",
-    titlePart2: "On Your",
-    titlePart3: "First order",
+    titlePart1: "save 5% on",
+    titlePart2: "PROFESSIONAL",
+    titlePart3: "Camera order",
     btnText: "Shop now",
   },
   {
@@ -48,7 +48,7 @@ const MainSlider = () => {
       pagination={{
         clickable: true,
       }}
-      className="mainSlider h-full bg-primary xl:bg-mainSlider xl:bg-no-repeat max-w-lg lg:max-w-none bg-cover rounded-lg overflow-hidden drop-shadow-2xl"
+      className="mainSlider cursor-grab active:cursor-grabbing h-full bg-primary xl:bg-mainSlider xl:bg-no-repeat max-w-lg lg:max-w-none bg-cover rounded-lg overflow-hidden drop-shadow-2xl"
     >
       <>
         {sliderData.map((slide, index) => {
