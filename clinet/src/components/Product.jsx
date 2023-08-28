@@ -33,7 +33,20 @@ const Product = ({ product }) => {
             {product.attributes.title.substring(0, 35)}...
           </div>
           {/* category price */}
-          <div className="text-lg text-accent">${product.attributes.price}</div>
+
+          {product.attributes.isNew ? (
+            <p className="text-lg text-accent">$ {product.attributes.price}</p>
+          ) : (
+            <p className="text-lg text-accent">
+              $
+              {Math.round(
+                product.attributes.price - product.attributes.price * 0.3
+              )}
+              <span className="line-through text-sm ms-2">
+                $ {product.attributes.price}
+              </span>
+            </p>
+          )}
         </div>
       </div>
     </Link>

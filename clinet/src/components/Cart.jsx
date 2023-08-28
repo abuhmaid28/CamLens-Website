@@ -8,7 +8,7 @@ import {
 } from "react-icons/io5";
 // context
 import { CartContext } from "../context/CartContext";
-import CartItem from "../components/CartItem";
+import CartItem from "./CartItem";
 
 // stripe import
 
@@ -17,10 +17,11 @@ import { request } from "../request";
 const Cart = () => {
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
 
+  const stripePromise = loadStripe(
+    "pk_test_51Nih4jJsuIt7aQPp0Um8mRhHUzsyXHLzQvhqwcfMRed1Y0iKBXJVvmWCacXgjVYc99SDdOFzAY3LBchMHm09BK6R00jtppncyX"
+  );
+
   const handlePayment = async () => {
-    const stripePromise = loadStripe(
-      "pk_test_51Nih4jJsuIt7aQPp0Um8mRhHUzsyXHLzQvhqwcfMRed1Y0iKBXJVvmWCacXgjVYc99SDdOFzAY3LBchMHm09BK6R00jtppncyX"
-    );
     try {
       const stripe = await stripePromise;
       const res = await request.post("/orders", {
@@ -29,8 +30,8 @@ const Cart = () => {
       await stripe.redirectToCheckout({
         sessionId: res.data.stripeSession.id,
       });
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
-import CategoryNav from "../components/CategoryNav";
-import MainSlider from "../components/MainSlider";
+import CategoryNav from "./CategoryNav";
+import MainSlider from "./MainSlider";
 import PromImg1 from "../img/promo_img1.png";
 import PromImg2 from "../img/promo_img2.png";
 const Hero = () => {

@@ -10,6 +10,8 @@ import "../slider.css";
 import { Pagination } from "swiper";
 // img
 import CameraImg from "../img/camera.png";
+import CameraImg2 from "../img/camera2.png";
+import CameraImg3 from "../img/camera3.png";
 //data
 
 const sliderData = [
@@ -22,19 +24,19 @@ const sliderData = [
     btnText: "Shop now",
   },
   {
-    img: CameraImg,
+    img: CameraImg2,
     preTitle: "special offer",
-    titlePart1: "save 20%",
+    titlePart1: "save 15%",
     titlePart2: "On Your",
-    titlePart3: "First order",
+    titlePart3: "Canon order",
     btnText: "Shop now",
   },
   {
-    img: CameraImg,
+    img: CameraImg3,
     preTitle: "special offer",
-    titlePart1: "save 20%",
+    titlePart1: "save 10%",
     titlePart2: "On Your",
-    titlePart3: "First order",
+    titlePart3: "Sony order",
     btnText: "Shop now",
   },
 ];

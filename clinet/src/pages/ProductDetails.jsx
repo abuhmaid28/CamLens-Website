@@ -56,6 +56,7 @@ const ProductDetails = () => {
         </div>
         {/* related products */}
         <RelatedProducts categoryTitle={categoryTitle} />
+        {/* <BigDeal /> */}
       </div>
     </div>
   );

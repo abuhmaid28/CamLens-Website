@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
-import Qty from "../components/Qty";
+import Qty from "./Qty";
 import { CartContext } from "../context/CartContext";
 // context
 const CartItem = ({ item }) => {

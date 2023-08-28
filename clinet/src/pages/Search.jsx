@@ -19,10 +19,10 @@ const Search = () => {
   return (
     <div className="mb-8 pt-40 lg:pt-5 xl:pt-0 ">
       <div className="container mx-auto">
-        <div className="flex gap-x-8">
+        <div className="flex gap-x-8 ">
           {/* category nav */}
           <CategoryNav />
-          <div>
+          <div className="mx-auto w-full">
             {/* title */}
             <div className="py-3 text-xl uppercase text-center lg:text-left ">
               {data?.length > 0
@@ -30,7 +30,12 @@ const Search = () => {
                 : `no result found for ${searchTerm}`}
             </div>
             {/* products grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 ${
+                data && data.length % 2 ? "xl:grid-cols-3" : "xl:grid-cols-4"
+              } `}
+            >
               {data?.map((product) => {
                 return <Product product={product} key={product.id} />;
               })}

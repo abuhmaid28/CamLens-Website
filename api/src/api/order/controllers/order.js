@@ -1,5 +1,4 @@
-import Stripe from "stripe";
-
+const Stripe = require("stripe");
 const stripeKey = process.env.STRIPE_KEY;
 
 if (!stripeKey) {
@@ -9,8 +8,6 @@ if (!stripeKey) {
 const stripeInstance = new Stripe(stripeKey, {
   apiVersion: "2023-08-16", // Replace with the desired API version
 });
-
-("use strict");
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
@@ -57,7 +54,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         payment_method_types: ["card"],
       });
 
-      await strapi.service("api::order:order").create({
+      await strapi.service("api::order.order").create({
         data: {
           products: cart,
           stripeId: session.id,

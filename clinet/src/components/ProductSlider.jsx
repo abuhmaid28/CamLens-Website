@@ -9,7 +9,7 @@ import "../slider.css";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 // components
-import Product from "../components/Product";
+import Product from "./Product";
 
 const ProductSlider = ({ data }) => {
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import LatestProducts from "../components/LatestProducts";
+import BigDeal from "../components/BigDeal";
 import Hero from "../components/Hero";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <section>
       <Hero />
       <LatestProducts />
+      <BigDeal />
     </section>
   );
 };

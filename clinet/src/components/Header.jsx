@@ -7,9 +7,9 @@ import { FiMenu } from "react-icons/fi";
 // link
 import { Link } from "react-router-dom";
 // components
-import SearchForm from "../components/SearchForm";
-import CategoryNavMobile from "../components/CategoryNavMobile";
-import Cart from "../components/Cart";
+import SearchForm from "./SearchForm";
+import CategoryNavMobile from "./CategoryNavMobile";
+import Cart from "./Cart";
 // cart content
 import { CartContext } from "../context/CartContext";
 const Header = () => {
