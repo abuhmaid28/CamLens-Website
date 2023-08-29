@@ -13,6 +13,7 @@ const SearchForm = () => {
 
   const handelSubmit = (e) => {
     e.preventDefault();
+
     if (searchTerm.length > 0) {
       navigate(`/search?query=${searchTerm}`);
       document.querySelector("input").value = "";
@@ -28,13 +29,6 @@ const SearchForm = () => {
     }
   };
 
-  // Listen for changes in searchTerm and trigger search when not empty
-  useEffect(() => {
-    if (searchTerm.length > 0) {
-      navigate(`/search?query=${searchTerm}`);
-    }
-  }, [searchTerm, navigate]);
-
   return (
     <form
       onSubmit={handelSubmit}
@@ -49,7 +43,7 @@ const SearchForm = () => {
         onChange={handelSearchInput}
       />
       <button className="btn btn-accent absolute top-0 right-0 rounded-l-none">
-        <FiSearch className="text-xl" />
+        <FiSearch className="text-xl " />
       </button>
     </form>
   );

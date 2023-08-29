@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 // icons
-import { IoArrowForward, IoCartOutline, IoClose } from "react-icons/io5";
+import {
+  IoArrowForward,
+  IoCafeOutline,
+  IoCartOutline,
+  IoClose,
+} from "react-icons/io5";
 // context
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
@@ -32,7 +37,7 @@ const Cart = () => {
 
   return (
     <div className="w-full h-full px-4 text-white">
-      <div className="overflow-y-auto overflow-x-hidden h-3/4">
+      <div className="overflow-y-auto overflow-x-hidden h-[65vh]">
         {/* close icon */}
         <div
           onClick={() => setIsOpen(false)}
@@ -40,7 +45,7 @@ const Cart = () => {
         >
           <IoClose />
         </div>
-        <div className="flex flex-col gap-y-10 px-2 ">
+        <div className="flex flex-col gap-y-10 px-2">
           {cart.map((item) => {
             return <CartItem item={item} key={item.id} />;
           })}
@@ -48,9 +53,9 @@ const Cart = () => {
       </div>
       {/* subtotal & total */}
       {cart.length >= 1 && (
-        <div className="h-1/6 px-6 py-10 flex flex-col">
+        <div className="px-6 py-10 flex flex-col">
           {/* SUBTOTAL */}
-          <div className="flex justify-between text-lg ">
+          <div className="flex justify-between text-lg">
             <div>Subtotal</div>
             <div>$ {total}</div>
           </div>
@@ -62,7 +67,7 @@ const Cart = () => {
         </div>
       )}
       {/* buttons */}
-      <div className="px-6 h-1/6">
+      <div className="px-6">
         {cart.length >= 1 ? (
           <div className="flex justify-between gap-x-4">
             <button

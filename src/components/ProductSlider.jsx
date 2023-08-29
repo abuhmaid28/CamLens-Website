@@ -1,10 +1,14 @@
 import React from "react";
+// import swiper react component
 import { Swiper, SwiperSlide } from "swiper/react";
+// import swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../slider.css";
+// import required modules
 import { Pagination, Navigation } from "swiper";
+// components
 import Product from "./Product";
 
 const ProductSlider = ({ data }) => {
@@ -36,13 +40,16 @@ const ProductSlider = ({ data }) => {
       }}
       className="productSlider mx-auto max-w-[360px] md:max-w-lg xl:max-w-[1410px]"
     >
-      {data?.map((product) => {
-        return (
-          <SwiperSlide key={product.id}>
-            {<Product product={product} />}
-          </SwiperSlide>
-        );
-      })}
+      <>
+        {/* loop through products and render them */}
+        {data?.map((product) => {
+          return (
+            <SwiperSlide key={product.id}>
+              <Product product={product} />
+            </SwiperSlide>
+          );
+        })}
+      </>
     </Swiper>
   );
 };

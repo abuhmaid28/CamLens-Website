@@ -3,42 +3,21 @@ import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import Qty from "./Qty";
 import { CartContext } from "../context/CartContext";
-import { calculatePrice } from "./PriceUtils"; // Import the calculatePrice function
-
 // context
 const CartItem = ({ item }) => {
   const { removeFromCart } = useContext(CartContext);
-
-  // Check if item is defined and has attributes
-  if (!item || !item.attributes) {
-    return null; // Return null or a placeholder if item is undefined or lacks attributes
-  }
-
-  // Get the necessary attributes for calculating the price
-  const categoryTitle =
-    item.attributes?.categories?.data?.[0]?.attributes?.title;
-  const cameraTitle = item.attributes?.title;
-  const cameraPrice = item.attributes?.price;
-
-  // Calculate the discounted price using the calculatePrice function
-  const calculatedPrice = calculatePrice(
-    cameraTitle,
-    categoryTitle,
-    cameraPrice
-  );
-
   return (
     <div className="flex gap-x-8">
       <Link to={`product/${item.id}`} className="w-[70px] h-[70px] ">
         <img
-          src={`http://localhost:1337${item.attributes?.image?.data?.attributes?.url}`}
+          src={`http://localhost:1337${item.attributes.image.data.attributes.url}`}
           alt="cart_item"
         />
       </Link>
       <div className="flex-1">
         {/* title & delete icon */}
         <div className="flex gap-x-4 mb-3 ">
-          <Link to={`product/${item.id}`}>{cameraTitle}</Link>
+          <Link to={`product/${item.id}`}>{item.attributes.title}</Link>
           <div
             onClick={() => removeFromCart(item.id)}
             className="cursor-pointer text-2xl hover:text-accent transition-all "
@@ -52,16 +31,14 @@ const CartItem = ({ item }) => {
             <Qty item={item} />
           </div>
           <div className="text-accent text-xl">
-            {/* Display the calculated price */}${" "}
-            {calculatedPrice * item.amount}
+            $ {item.attributes.price * item.amount}
           </div>
         </div>
         {/* price */}
         <div>
-          <div className="text-accent">
-            {/* Display the original price per piece */}${calculatedPrice} per
-            piece
-          </div>
+          <span className="text-accent">
+            $ {item.attributes.price} per piece
+          </span>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import ProductSlider from "./ProductSlider";
 import useFetch from "../hooks/useFetch";
 import { calculatePrice } from "./PriceUtils";
 
-const BigDeal = () => {
+const OldProducts = () => {
   // get all products
   const { data } = useFetch("/products?populate=*&filters[isNew]=false");
 
@@ -28,7 +28,7 @@ const BigDeal = () => {
     <div className="mb-16">
       <div className="container mx-auto">
         <h2 className="h2 mb-6 text-center xl:text-left text-accent">
-          Big Deal
+          Old Products
         </h2>
       </div>
       <ProductSlider data={filteredData} />
@@ -36,4 +36,4 @@ const BigDeal = () => {
   );
 };
 
-export default BigDeal;
+export default OldProducts;

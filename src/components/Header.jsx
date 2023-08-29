@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 // images
 import Logo from "../img/logo.png";
 // icons
-
-import { SlBag } from "react-icons/sl";
+import { SlBag, SlInfo } from "react-icons/sl";
 import { FiMenu } from "react-icons/fi";
 // link
 import { Link } from "react-router-dom";
@@ -13,17 +12,19 @@ import CategoryNavMobile from "./CategoryNavMobile";
 import Cart from "./Cart";
 // cart content
 import { CartContext } from "../context/CartContext";
+// motion
+import { motion } from "framer-motion";
 const Header = () => {
   const { isOpen, setIsOpen, itemsAmount } = useContext(CartContext);
   const [catNavMobile, setCatNavMobile] = useState(false);
   return (
-    <header className="bg-primary py-6 fixed w-full top-0 z-40 lg:relative lg:mb-7">
+    <header className="bg-primary py-6 fixed w-full top-0 z-40 lg:relative xl:mb-7">
       <div className="container mx-auto">
-        <div className="flex items-center justify-between mb-4 lg:mb-0">
+        <div className="flex flex-row gap-4 lg:items-center justify-between mb-4 xl:mb-0">
           {/* menu */}
           <div
             onClick={() => setCatNavMobile(true)}
-            className="text-3xl lg:hidden cursor-pointer"
+            className="text-3xl xl:hidden cursor-pointer"
           >
             <FiMenu />
           </div>
@@ -35,24 +36,19 @@ const Header = () => {
           >
             <CategoryNavMobile setCatNavMobile={setCatNavMobile} />
           </div>
-
           {/* logo */}
           <Link to={"/"}>
-            <img
-              src={Logo}
-              alt="Website_logo"
-              className="hover:scale-105 transition-all duration-300"
-            />
+            <img src={Logo} alt="Website_logo" />
           </Link>
           {/* searchForm - show only on desktop */}
-          <div className="hidden flex-1 lg:flex">
+          <div className="hidden w-full xl:flex xl:max-w-[734px] ">
             <SearchForm />
           </div>
           {/* phone & cart */}
           <div className="flex items-center gap-x-3">
             {/* phone */}
-            <div className="hidden lg:flex uppercase w-full ">
-              need help? +20 1010 8926 01
+            <div className="hidden xl:flex uppercase ">
+              need help? 010 108 926 01
             </div>
             {/* cart icon */}
             <div
@@ -76,7 +72,7 @@ const Header = () => {
           </div>
         </div>
         {/* searchForm - show only on mobile */}
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <SearchForm />
         </div>
       </div>
