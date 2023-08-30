@@ -29,7 +29,7 @@ const ProductFilters = ({
   };
 
   return (
-    <div className="bg-primary flex flex-col w-72 h-96 rounded-lg overflow-hidden">
+    <div className="bg-primary flex flex-col h-96 rounded-lg overflow-hidden">
       <div className="bg-accent py-4 text-primary uppercase font-semibold flex items-center justify-center">
         Filter Options
       </div>

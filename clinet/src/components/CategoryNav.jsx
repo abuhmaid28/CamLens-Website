@@ -2,13 +2,15 @@ import React from "react";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 
-const CategoryNav = ({ hieght }) => {
+const CategoryNav = ({ height }) => {
   const { data } = useFetch("/categories");
 
   return (
-    <aside className="hidden lg:flex">
+    <aside className="hidden xl:flex">
       <div
-        className={`bg-primary flex flex-col w-72 rounded-lg overflow-hidden h-[${hieght}px] -my-1`}
+        className={`bg-primary flex flex-col w-full rounded-lg overflow-hidden ${
+          height > 0 ? `h-[500px]` : `h-96`
+        }`}
       >
         <div className="bg-accent py-4 text-primary uppercase font-semibold flex items-center justify-center">
           Browse Categories

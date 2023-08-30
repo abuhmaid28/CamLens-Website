@@ -23,10 +23,10 @@ const ProductSlider = ({ data }) => {
           spaceBetween: 30,
         },
         1024: {
-          slidesPerView: 2,
+          slidesPerView: 4,
           spaceBetween: 30,
         },
-        1440: {
+        1280: {
           slidesPerView: 5,
           spaceBetween: 30,
         },
@@ -34,7 +34,7 @@ const ProductSlider = ({ data }) => {
       pagination={{
         clickable: true,
       }}
-      className="productSlider mx-auto max-w-[360px] md:max-w-lg xl:max-w-[1410px]"
+      className="productSlider mx-auto container"
     >
       {data?.map((product) => {
         return (

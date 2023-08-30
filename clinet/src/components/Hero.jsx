@@ -1,94 +1,84 @@
+// Hero.js
 import React from "react";
 import CategoryNav from "./CategoryNav";
 import MainSlider from "./MainSlider";
 import PromImg1 from "../img/promo_img1.png";
 import PromImg2 from "../img/promo_img2.png";
-// framer motion import
 import { motion } from "framer-motion";
+import { fadeVariants } from "./AnimationVariants"; // Import the animation variants
 
 const Hero = () => {
-  // Animation variants for fade-in effect
-  const fadeVariants = {
-    initial: { opacity: 0, scale: 0.9, y: 30 },
-    animate: {
-      opacity: 1,
-      transition: { duration: 1, delay: 0.5 },
-      scale: 1,
-      y: 0,
-    }, // Adjust duration and delay values as needed
-  };
+  const heroHeight = 500;
 
-  const heroHieght = 500;
   return (
     <section className="mb-8 pt-36 lg:pt-0">
-      <div className="container mx-auto">
-        <div className="flex flex-col gap-y-7 xl:flex-row xl:gap-x-7">
-          {/* sidebar */}
+      <div className="container mx-auto grid lg:gap-7 grid-cols-12 2xl:px-20">
+        {/* sidebar */}
+        <motion.div
+          className="xl:block xl:col-span-2 lg:hidden"
+          initial="initial"
+          animate="animate"
+          variants={fadeVariants} // Use the imported fadeVariants here
+        >
+          <CategoryNav height={heroHeight} />
+        </motion.div>
+        {/* main slider */}
+        <motion.div
+          className="xl:col-span-7 lg:col-span-8"
+          initial="initial"
+          animate="animate"
+          variants={fadeVariants} // Use the imported fadeVariants here
+        >
+          <MainSlider />
+        </motion.div>
+        {/* promos */}
+        <div className="xl:col-span-3 lg:col-span-4 grid grid-cols-1 gap-7">
+          {/* promo 1 */}
           <motion.div
+            className="grad rounded-lg overflow-hidden relative p-6"
             initial="initial"
             animate="animate"
-            variants={fadeVariants}
+            variants={fadeVariants} // Use the imported fadeVariants here
           >
-            <CategoryNav hieght={heroHieght} />
+            {/* text */}
+            <div className="flex flex-col max-w-[144px] h-full justify-center">
+              <div className="text-xl uppercase leading-tight font-medium mb-4">
+                save 10% all dslr cameras
+              </div>
+              <a href="#" className="text-accent uppercase">
+                Shop now
+              </a>
+            </div>
+            {/* image */}
+            <img
+              className="absolute z-20 xl:-top-2 xl:-right-4 lg:top-0 lg:align-middle"
+              src={PromImg1}
+              alt="card_image"
+            />
           </motion.div>
-          {/* main slider */}
+          {/* promo 2 */}
           <motion.div
-            className="w-full max-w-lg lg:max-w-3xl mx-auto"
+            className="grad rounded-lg overflow-hidden relative p-6"
             initial="initial"
             animate="animate"
-            variants={fadeVariants}
+            variants={fadeVariants} // Use the imported fadeVariants here
           >
-            <MainSlider />
+            {/* text */}
+            <div className="flex flex-col max-w-[144px] h-full justify-center">
+              <div className="text-xl uppercase leading-tight font-medium mb-4">
+                save 5% all mirrorless cameras
+              </div>
+              <a href="#" className="text-accent uppercase">
+                Shop now
+              </a>
+            </div>
+            {/* image */}
+            <img
+              className="absolute z-20 xl:top-4 -right-6 lg:top-0"
+              src={PromImg2}
+              alt="card_image"
+            />
           </motion.div>
-          {/* promos */}
-          <div className="flex flex-col gap-y-7  h-[500px] w-full mx-auto">
-            {/* promo 1 */}
-            <motion.div
-              className="grad flex-1 h-60 rounded-lg overflow-hidden relative p-6"
-              initial="initial"
-              animate="animate"
-              variants={fadeVariants}
-            >
-              {/* text */}
-              <div className="flex flex-col max-w-[144px] h-full justify-center">
-                <div className="text-xl uppercase leading-tight font-medium mb-4">
-                  save 10% all dslr cameras
-                </div>
-                <a href="#" className="text-accent uppercase">
-                  Shop now
-                </a>
-              </div>
-              {/* image */}
-              <img
-                className="absolute z-20 -top-2 -right-4"
-                src={PromImg1}
-                alt="card_image"
-              />
-            </motion.div>
-            {/* promo 2 */}
-            <motion.div
-              className="grad flex-1 h-60 rounded-lg overflow-hidden relative p-6"
-              initial="initial"
-              animate="animate"
-              variants={fadeVariants}
-            >
-              {/* text */}
-              <div className="flex flex-col max-w-[144px] h-full justify-center">
-                <div className="text-xl uppercase leading-tight font-medium mb-4">
-                  save 5% all mirrorless cameras
-                </div>
-                <a href="#" className="text-accent uppercase">
-                  Shop now
-                </a>
-              </div>
-              {/* image */}
-              <img
-                className="absolute z-20 top-4 -right-6"
-                src={PromImg2}
-                alt="card_image"
-              />
-            </motion.div>
-          </div>
         </div>
       </div>
     </section>

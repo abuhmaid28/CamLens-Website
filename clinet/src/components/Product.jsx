@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { calculatePrice } from "./PriceUtils";
 import { motion } from "framer-motion";
+import { fadeVariants } from "./AnimationVariants"; // Import the animation variants
 
 const Product = ({ product }) => {
   const categoryTitle = product.attributes.categories.data[0].attributes.title;
@@ -42,20 +43,9 @@ const Product = ({ product }) => {
     <Link to={`/product/${product.id}`}>
       <motion.div
         ref={productRef}
-        initial={{ opacity: 0, y: 30, scale: 0.9 }}
-        animate={{
-          opacity: isVisible ? 1 : 0,
-          y: isVisible ? 0 : 30,
-          scale: isVisible ? 1 : 0.9,
-        }}
-        transition={{
-          duration: 1.5,
-          delay: 0.3,
-          ease: "easeInOut",
-          type: "spring",
-          damping: 8,
-          stiffness: 100,
-        }}
+        initial="initial"
+        animate={isVisible ? "animate" : "initial"}
+        variants={fadeVariants} // Use the imported fadeVariants here
         className="group grad w-full h-96 rounded-lg overflow-hidden relative"
       >
         {product.attributes.isNew && (

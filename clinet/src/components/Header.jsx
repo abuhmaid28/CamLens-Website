@@ -19,11 +19,11 @@ const Header = () => {
   return (
     <header className="bg-primary py-6 fixed w-full top-0 z-40 lg:relative lg:mb-7">
       <div className="container mx-auto">
-        <div className="flex items-center justify-between mb-4 lg:mb-0">
+        <div className="flex items-center justify-between gap-x-8 mb-4 lg:mb-0">
           {/* menu */}
           <div
             onClick={() => setCatNavMobile(true)}
-            className="text-3xl lg:hidden cursor-pointer"
+            className="text-3xl xl:hidden cursor-pointer"
           >
             <FiMenu />
           </div>

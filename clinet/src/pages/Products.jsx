@@ -69,13 +69,19 @@ const Products = () => {
     filteredData = filteredData.filter((product) => product.attributes.isNew);
   }
 
-  const productsPageHeight = 390;
   return (
     <div className="mb-16 pt-40 lg:pt-0">
-      <div className="container mx-auto">
-        <div className="flex gap-x-8">
-          <div className="flex flex-col gap-y-8">
-            <CategoryNav hieght={productsPageHeight} />
+      <div className="container mx-auto ">
+        <div className="gap-x-8 grid grid-cols-12 ">
+          <div
+            className={`flex flex-col gap-y-8 ${
+              (filteredData && filteredData.length % 4 === 0) ||
+              (filteredData && filteredData.length === 7)
+                ? "col-span-2"
+                : "col-span-3"
+            } `}
+          >
+            <CategoryNav />
             {/* Filter Controls */}
 
             <ProductFilters
@@ -87,11 +93,29 @@ const Products = () => {
               setIsNew={setIsNew}
             />
           </div>
-          <main className="mx-auto w-full">
+          <main
+            className={`mx-auto w-full ${
+              (filteredData && filteredData.length % 4 === 0) ||
+              (filteredData && filteredData.length === 7)
+                ? "col-span-10"
+                : "col-span-9"
+            }`}
+          >
             {/* Product grid */}
             <div
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 ${
-                data && data.length % 2 ? "xl:grid-cols-3" : "xl:grid-cols-4"
+                filteredData && filteredData.length % 4 === 0
+                  ? "xl:grid-cols-4"
+                  : filteredData && filteredData.length === 2
+                  ? "xl:grid-cols-2"
+                  : filteredData &&
+                    filteredData.length % 4 !== 0 &&
+                    filteredData &&
+                    filteredData.length % 3 !== 0 &&
+                    filteredData &&
+                    filteredData.length % 5 !== 0
+                  ? "xl:grid-cols-4"
+                  : "xl:grid-cols-3"
               } `}
             >
               {filteredData.map((product) => {

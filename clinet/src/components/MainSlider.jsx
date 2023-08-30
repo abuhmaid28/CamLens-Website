@@ -1,18 +1,15 @@
 import React from "react";
-// import swiper react component
 import { Swiper, SwiperSlide } from "swiper/react";
-// import swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../slider.css";
-// import required modules
 import { Pagination } from "swiper";
-// img
-import CameraImg from "../img/camera.png";
-import CameraImg2 from "../img/camera2.png";
-import CameraImg3 from "../img/camera3.png";
-//data
+import CameraImg from "../img/camera.webp";
+import CameraImg2 from "../img/camera2.webp";
+import CameraImg3 from "../img/camera3.webp";
+import useFetch from "../hooks/useFetch";
+import { Link } from "react-router-dom";
 
 const sliderData = [
   {
@@ -22,6 +19,7 @@ const sliderData = [
     titlePart2: "PROFESSIONAL",
     titlePart3: "Camera order",
     btnText: "Shop now",
+    link: "/products/4",
   },
   {
     img: CameraImg2,
@@ -30,6 +28,7 @@ const sliderData = [
     titlePart2: "On Your",
     titlePart3: "Canon order",
     btnText: "Shop now",
+    link: "/search?query=canon",
   },
   {
     img: CameraImg3,
@@ -38,9 +37,12 @@ const sliderData = [
     titlePart2: "On Your",
     titlePart3: "Sony order",
     btnText: "Shop now",
+    link: "/search?query=sony",
   },
 ];
+
 const MainSlider = () => {
+  const { data } = useFetch("/categories");
   return (
     <Swiper
       modules={[Pagination]}
@@ -48,31 +50,31 @@ const MainSlider = () => {
       pagination={{
         clickable: true,
       }}
-      className="mainSlider cursor-grab active:cursor-grabbing h-full bg-primary xl:bg-mainSlider xl:bg-no-repeat max-w-lg lg:max-w-none bg-cover rounded-lg overflow-hidden drop-shadow-2xl"
+      className="mainSlider cursor-grab active:cursor-grabbing h-full bg-primary xl:bg-mainSlider xl:bg-no-repeat bg-cover rounded-lg overflow-hidden drop-shadow-2xl"
     >
       <>
         {sliderData.map((slide, index) => {
           return (
             <SwiperSlide key={index}>
-              <div className="flex flex-col lg:flex-row h-full p-5 md:p-14">
-                {/* text */}
+              <div className="flex flex-col xl:flex-row h-full p-5 md:p-14">
                 <div className="w-full lg:flex-1">
-                  <div className="uppercase mb-1 text-center lg:text-left">
+                  <div className="uppercase mb-1 text-center xl:text-left">
                     {slide.preTitle}
                   </div>
-                  <div className="text-3xl md:text-5xl font-semibold uppercase leading-none text-center lg:text-left mb-8 xl:mb-20">
+                  <div className="text-3xl md:text-5xl font-semibold uppercase leading-none text-center xl:text-left mb-8 xl:mb-20">
                     <p>{slide.titlePart1}</p>
                     <p>{slide.titlePart2}</p>
                     <p>{slide.titlePart3}</p>
                   </div>
-                  <button className="btn btn-accent mx-auto lg:mx-0">
-                    Shop now
-                  </button>
+                  <div>
+                    <button className="btn btn-accent mx-auto xl:mx-0">
+                      <Link to={slide.link}>{slide.btnText}</Link>
+                    </button>
+                  </div>
                 </div>
-                {/* image */}
-                <div className="flex-1">
+                <div className="flex-1 flex justify-center items-center">
                   <img
-                    className="xl:absolute xl:-right-16 xl:-bottom-12 "
+                    className="xl:absolute xl:-right-16 xl:-bottom-12 lg:mt-5 lg:mr-8 xl:mt-0 xl:mr-0 "
                     src={slide.img}
                     alt="slide_image"
                   />
