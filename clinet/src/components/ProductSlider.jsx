@@ -36,13 +36,11 @@ const ProductSlider = ({ data }) => {
       }}
       className="productSlider mx-auto container"
     >
-      {data?.map((product) => {
-        return (
-          <SwiperSlide key={product.id}>
-            {<Product product={product} />}
-          </SwiperSlide>
-        );
-      })}
+      {data?.map((product) => (
+        <SwiperSlide key={product.id}>
+          <Product product={product} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };

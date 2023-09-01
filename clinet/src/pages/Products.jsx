@@ -23,51 +23,58 @@ const Products = () => {
     }
   }, [data]);
 
-  let filteredData = [...data];
+  // Function to filter and sort products based on user selections
+  const filterAndSortProducts = () => {
+    let filteredData = [...data];
 
-  if (sortBy === "aToZ") {
-    filteredData.sort((a, b) =>
-      a.attributes.title.localeCompare(b.attributes.title)
-    );
-  } else if (sortBy === "zToA") {
-    filteredData.sort((a, b) =>
-      b.attributes.title.localeCompare(a.attributes.title)
-    );
-  }
+    if (sortBy === "aToZ") {
+      filteredData.sort((a, b) =>
+        a.attributes.title.localeCompare(b.attributes.title)
+      );
+    } else if (sortBy === "zToA") {
+      filteredData.sort((a, b) =>
+        b.attributes.title.localeCompare(a.attributes.title)
+      );
+    }
 
-  if (priceOrder === "lowToHigh") {
-    filteredData.sort(
-      (a, b) =>
-        calculatePrice(
-          a.attributes.title,
-          a.attributes.categories.data[0].attributes.title,
-          a.attributes.price
-        ) -
-        calculatePrice(
-          b.attributes.title,
-          b.attributes.categories.data[0].attributes.title,
-          b.attributes.price
-        )
-    );
-  } else if (priceOrder === "highToLow") {
-    filteredData.sort(
-      (a, b) =>
-        calculatePrice(
-          b.attributes.title,
-          b.attributes.categories.data[0].attributes.title,
-          b.attributes.price
-        ) -
-        calculatePrice(
-          a.attributes.title,
-          a.attributes.categories.data[0].attributes.title,
-          a.attributes.price
-        )
-    );
-  }
+    if (priceOrder === "lowToHigh") {
+      filteredData.sort(
+        (a, b) =>
+          calculatePrice(
+            a.attributes.title,
+            a.attributes.categories.data[0].attributes.title,
+            a.attributes.price
+          ) -
+          calculatePrice(
+            b.attributes.title,
+            b.attributes.categories.data[0].attributes.title,
+            b.attributes.price
+          )
+      );
+    } else if (priceOrder === "highToLow") {
+      filteredData.sort(
+        (a, b) =>
+          calculatePrice(
+            b.attributes.title,
+            b.attributes.categories.data[0].attributes.title,
+            b.attributes.price
+          ) -
+          calculatePrice(
+            a.attributes.title,
+            a.attributes.categories.data[0].attributes.title,
+            a.attributes.price
+          )
+      );
+    }
 
-  if (isNew) {
-    filteredData = filteredData.filter((product) => product.attributes.isNew);
-  }
+    if (isNew) {
+      filteredData = filteredData.filter((product) => product.attributes.isNew);
+    }
+
+    return filteredData;
+  };
+
+  const filteredData = filterAndSortProducts();
 
   return (
     <div className="mb-16 pt-40 mt-5 lg:pt-0 px-5">
@@ -84,7 +91,6 @@ const Products = () => {
           >
             <CategoryNav hide={"ProductsShow"} />
             {/* Filter Controls */}
-
             <ProductFilters
               sortBy={sortBy}
               setSortBy={setSortBy}

@@ -5,7 +5,6 @@ import Qty from "./Qty";
 import { CartContext } from "../context/CartContext";
 import { calculatePrice } from "./PriceUtils"; // Import the calculatePrice function
 
-// context
 const CartItem = ({ item }) => {
   const { removeFromCart } = useContext(CartContext);
 
@@ -36,7 +35,7 @@ const CartItem = ({ item }) => {
         />
       </Link>
       <div className="flex-1">
-        {/* title & delete icon */}
+        {/* Title & delete icon */}
         <div className="flex gap-x-4 mb-3 ">
           <Link to={`product/${item.id}`}>{cameraTitle}</Link>
           <div
@@ -47,16 +46,17 @@ const CartItem = ({ item }) => {
           </div>
         </div>
         <div className=" flex items-center gap-x-12 ">
-          {/* quantity */}
+          {/* Quantity */}
           <div className="flex gap-x-4 mb-2">
             <Qty item={item} />
           </div>
           <div className="text-accent text-xl">
-            {/* Display the calculated price */}${" "}
-            {calculatedPrice * item.amount}
+            {/* Display the calculated price */}$
+            {(calculatedPrice * item.amount).toFixed(2)}
+            {/* Format the price with two decimal places */}
           </div>
         </div>
-        {/* price */}
+        {/* Price */}
         <div>
           <div className="text-accent">
             {/* Display the original price per piece */}${calculatedPrice} per

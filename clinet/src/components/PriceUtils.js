@@ -1,14 +1,20 @@
 export const calculatePrice = (cameraTitle, categoryTitle, cameraPrice) => {
+  let discount = 0;
+
+  // Check if the camera title contains specific keywords
   if (cameraTitle.includes("Canon")) {
-    return (cameraPrice - cameraPrice * 0.15).toFixed(2);
+    discount = 0.15;
   } else if (cameraTitle.includes("Sony") || categoryTitle === "dslr") {
-    return (cameraPrice - cameraPrice * 0.1).toFixed(2);
+    discount = 0.1;
   } else if (
     categoryTitle === "mirrorless" ||
     categoryTitle === "professional"
   ) {
-    return (cameraPrice - cameraPrice * 0.05).toFixed(2);
-  } else {
-    return cameraPrice;
+    discount = 0.05;
   }
+
+  // Calculate the discounted price and round it to two decimal places
+  const discountedPrice = (cameraPrice * (1 - discount)).toFixed(2);
+
+  return discountedPrice;
 };

@@ -9,7 +9,7 @@ const CartProvider = ({ children }) => {
   const [amount, setAmount] = useState(0);
   const [total, setTotal] = useState(0);
 
-  // cart amount
+  // Calculate the total number of items in the cart
   useEffect(() => {
     const amount = cart.reduce((a, c) => {
       return a + c.amount;
@@ -17,7 +17,7 @@ const CartProvider = ({ children }) => {
     setItemsAmount(amount);
   }, [cart]);
 
-  // cart total
+  // Calculate the total price of items in the cart
   useEffect(() => {
     const total = cart.reduce((a, c) => {
       return a + c.attributes.price * c.amount;
@@ -25,6 +25,7 @@ const CartProvider = ({ children }) => {
     setTotal(total);
   }, [cart]);
 
+  // Add an item to the cart
   const addToCart = (item, id) => {
     const itemID = parseInt(id);
     const newItem = { ...item[0], amount: 1 };
@@ -44,7 +45,7 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  // remove from cart
+  // Remove an item from the cart
   const removeFromCart = (id) => {
     const newCart = cart.filter((item) => {
       return item.id !== id;
@@ -52,13 +53,10 @@ const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
-  // handle input
+  // Handle input changes for item amount
   const handleInput = (e, id) => {
     const value = parseInt(e.target.value);
-    // find the item in the cart by id
-    const cartItem = cart.find((item) => {
-      return item.id === id;
-    });
+    const cartItem = cart.find((item) => item.id === id);
     if (cartItem) {
       const newCart = cart.map((item) => {
         if (item.id === id) {
@@ -78,13 +76,10 @@ const CartProvider = ({ children }) => {
     setIsOpen(true);
   };
 
-  // handle select
+  // Handle select changes for item amount
   const handleSelect = (e, id) => {
     const value = parseInt(e.target.value);
-    // find the item in the cart by id
-    const cartItem = cart.find((item) => {
-      return item.id === id;
-    });
+    const cartItem = cart.find((item) => item.id === id);
     if (cartItem) {
       const newCart = [...cart].map((item) => {
         if (item.id === id) {
@@ -99,7 +94,7 @@ const CartProvider = ({ children }) => {
     setIsOpen(true);
   };
 
-  // clear cart
+  // Clear the cart
   const clearCart = () => {
     setCart([]);
   };

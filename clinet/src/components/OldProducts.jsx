@@ -4,16 +4,17 @@ import useFetch from "../hooks/useFetch";
 import { calculatePrice } from "./PriceUtils";
 
 const OldProducts = () => {
-  // get all products
+  // Fetch all products
   const { data } = useFetch("/products?populate=*&filters[isNew]=false");
 
-  // Apply your condition here to filter the data
+  // Filter the data based on your condition
   const filteredData = data.filter((product) => {
     const categoryTitle =
       product.attributes.categories.data[0].attributes.title;
     const cameraTitle = product.attributes.title;
     const cameraPrice = product.attributes.price;
 
+    // Calculate the price for the product
     const calculatedPrice = calculatePrice(
       cameraTitle,
       categoryTitle,

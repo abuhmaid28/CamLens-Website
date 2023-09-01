@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-// useLocation hook
 import { useLocation } from "react-router-dom";
-// useFetch hook
 import useFetch from "../hooks/useFetch";
-// components
 import CategoryNav from "../components/CategoryNav";
 import Product from "../components/Product";
 import ProductFilters from "../components/ProductFilters";
@@ -13,13 +10,13 @@ const Search = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchTerm = searchParams.get("query");
-  console.log(searchTerm);
-  // get products based on search term
+
+  // Get products based on the search term
   const { data } = useFetch(
     `/products?populate=*&filters[title][$contains]=${searchTerm}`
   );
-  const [title, setTitle] = useState(null);
 
+  const [title, setTitle] = useState(null);
   const [sortBy, setSortBy] = useState("default");
   const [priceOrder, setPriceOrder] = useState("default");
   const [isNew, setIsNew] = useState(false);
@@ -30,51 +27,58 @@ const Search = () => {
     }
   }, [data]);
 
-  let filteredData = [...data];
+  // Function to filter and sort products based on user selections
+  const filterAndSortProducts = () => {
+    let filteredData = [...data];
 
-  if (sortBy === "aToZ") {
-    filteredData.sort((a, b) =>
-      a.attributes.title.localeCompare(b.attributes.title)
-    );
-  } else if (sortBy === "zToA") {
-    filteredData.sort((a, b) =>
-      b.attributes.title.localeCompare(a.attributes.title)
-    );
-  }
+    if (sortBy === "aToZ") {
+      filteredData.sort((a, b) =>
+        a.attributes.title.localeCompare(b.attributes.title)
+      );
+    } else if (sortBy === "zToA") {
+      filteredData.sort((a, b) =>
+        b.attributes.title.localeCompare(a.attributes.title)
+      );
+    }
 
-  if (priceOrder === "lowToHigh") {
-    filteredData.sort(
-      (a, b) =>
-        calculatePrice(
-          a.attributes.title,
-          a.attributes.categories.data[0].attributes.title,
-          a.attributes.price
-        ) -
-        calculatePrice(
-          b.attributes.title,
-          b.attributes.categories.data[0].attributes.title,
-          b.attributes.price
-        )
-    );
-  } else if (priceOrder === "highToLow") {
-    filteredData.sort(
-      (a, b) =>
-        calculatePrice(
-          b.attributes.title,
-          b.attributes.categories.data[0].attributes.title,
-          b.attributes.price
-        ) -
-        calculatePrice(
-          a.attributes.title,
-          a.attributes.categories.data[0].attributes.title,
-          a.attributes.price
-        )
-    );
-  }
+    if (priceOrder === "lowToHigh") {
+      filteredData.sort(
+        (a, b) =>
+          calculatePrice(
+            a.attributes.title,
+            a.attributes.categories.data[0].attributes.title,
+            a.attributes.price
+          ) -
+          calculatePrice(
+            b.attributes.title,
+            b.attributes.categories.data[0].attributes.title,
+            b.attributes.price
+          )
+      );
+    } else if (priceOrder === "highToLow") {
+      filteredData.sort(
+        (a, b) =>
+          calculatePrice(
+            b.attributes.title,
+            b.attributes.categories.data[0].attributes.title,
+            b.attributes.price
+          ) -
+          calculatePrice(
+            a.attributes.title,
+            a.attributes.categories.data[0].attributes.title,
+            a.attributes.price
+          )
+      );
+    }
 
-  if (isNew) {
-    filteredData = filteredData.filter((product) => product.attributes.isNew);
-  }
+    if (isNew) {
+      filteredData = filteredData.filter((product) => product.attributes.isNew);
+    }
+
+    return filteredData;
+  };
+
+  const filteredData = filterAndSortProducts();
 
   return (
     <div className="mb-16 pt-40 lg:pt-0 px-5">

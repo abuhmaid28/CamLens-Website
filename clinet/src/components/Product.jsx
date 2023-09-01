@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { calculatePrice } from "./PriceUtils";
 import { motion } from "framer-motion";
-import { fadeVariants } from "./AnimationVariants"; // Import the animation variants
+import { fadeVariants } from "./AnimationVariants";
+import { FaStar } from "react-icons/fa";
 
 const Product = ({ product }) => {
   const categoryTitle = product.attributes.categories.data[0].attributes.title;
   const cameraTitle = product.attributes.title;
   const cameraPrice = product.attributes.price;
+  const cameraRate = product.attributes.rate;
+  const cameraReviewsCount = product.attributes.reviewscount;
 
   const [isVisible, setIsVisible] = useState(false);
   const productRef = useRef(null);
@@ -45,7 +48,7 @@ const Product = ({ product }) => {
         ref={productRef}
         initial="initial"
         animate={isVisible ? "animate" : "initial"}
-        variants={fadeVariants} // Use the imported fadeVariants here
+        variants={fadeVariants}
         className="group grad w-full h-96 rounded-lg overflow-hidden relative"
       >
         {product.attributes.isNew && (
@@ -69,12 +72,25 @@ const Product = ({ product }) => {
           <div className="text-sm mb-4 lg:mb-9">
             {cameraTitle.substring(0, 35)}...
           </div>
-          <p className="text-lg text-accent">
-            ${calculatedPrice}
-            {calculatedPrice < cameraPrice && (
-              <span className="line-through text-sm ms-2">${cameraPrice}</span>
+          <div className="flex justify-between items-center mt-2 sm:mt-0">
+            <p className="2xl:text-lg text-accent">
+              ${calculatedPrice}
+              {calculatedPrice < cameraPrice && (
+                <span className="line-through text-xs mx-1 2xl:text-sm">
+                  ${cameraPrice}
+                </span>
+              )}
+            </p>
+            {cameraReviewsCount && (
+              <p className="text-accent 2xl:text-lg text-base flex items-center gap-x-1">
+                {cameraRate}
+                <FaStar />{" "}
+                <span className="2xl:text-sm text-xs">
+                  ({cameraReviewsCount})
+                </span>
+              </p>
             )}
-          </p>
+          </div>
         </div>
       </motion.div>
     </Link>

@@ -1,21 +1,18 @@
 import React, { useContext } from "react";
-// icons
 import { IoArrowForward, IoCartOutline, IoClose } from "react-icons/io5";
-// context
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
-
-// stripe import
-
 import { loadStripe } from "@stripe/stripe-js";
 import { request } from "../request";
+
 const Cart = () => {
+  // Access cart-related data and functions from the CartContext
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
 
-  const stripePromise = loadStripe(
-    "pk_test_51Nih4jJsuIt7aQPp0Um8mRhHUzsyXHLzQvhqwcfMRed1Y0iKBXJVvmWCacXgjVYc99SDdOFzAY3LBchMHm09BK6R00jtppncyX"
-  );
+  // Load the Stripe API using a promise
+  const stripePromise = loadStripe("your_stripe_public_key_here");
 
+  // Handle the payment process
   const handlePayment = async () => {
     try {
       const stripe = await stripePromise;
@@ -33,7 +30,7 @@ const Cart = () => {
   return (
     <div className="w-full h-[90%] sm:h-full px-4 text-white">
       <div className="overflow-y-auto overflow-x-hidden h-3/4">
-        {/* close icon */}
+        {/* Close icon */}
         <div
           onClick={() => setIsOpen(false)}
           className="text-4xl w-20 h-24 flex justify-start items-center cursor-pointer"
@@ -41,27 +38,30 @@ const Cart = () => {
           <IoClose />
         </div>
         <div className="flex flex-col gap-y-10 px-2 ">
+          {/* Render cart items */}
           {cart.map((item) => {
             return <CartItem item={item} key={item.id} />;
           })}
         </div>
       </div>
-      {/* subtotal & total */}
+      {/* Subtotal & Total */}
       {cart.length >= 1 && (
         <div className="h-1/6 px-6 py-10 flex flex-col">
           {/* SUBTOTAL */}
-          <div className="flex justify-between text-lg ">
+          <div className="flex justify-between text-lg">
             <div>Subtotal</div>
-            <div>$ {total}</div>
+            <div>$ {total.toFixed(2)}</div>
+            {/* Format the total with two decimal places */}
           </div>
           {/* TOTAL */}
           <div className="flex justify-between text-2xl">
             <div>Total</div>
-            <div>$ {total}</div>
+            <div>$ {total.toFixed(2)}</div>
+            {/* Format the total with two decimal places */}
           </div>
         </div>
       )}
-      {/* buttons */}
+      {/* Buttons */}
       <div className="px-6 h-1/6">
         {cart.length >= 1 ? (
           <div className="flex justify-between gap-x-4 mt-4 sm:mt-0">
@@ -69,7 +69,7 @@ const Cart = () => {
               onClick={clearCart}
               className="btn btn-accent min-w-fit text-xs px-2 sm:px-10 sm:text-sm w-2/5"
             >
-              clear cart
+              Clear Cart
             </button>
             <button
               onClick={handlePayment}

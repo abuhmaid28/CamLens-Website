@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
 const CategoryNavMobile = ({ setCatNavMobile }) => {
+  // Fetch category data using the useFetch hook
   const { data } = useFetch("/categories");
 
+  // Function to close the mobile navigation
   const handleCloseNav = () => {
     setCatNavMobile(false);
   };
 
   return (
     <div className="w-full h-full bg-primary p-8">
-      {/* close icon */}
+      {/* Close icon */}
       <div
         onClick={handleCloseNav}
         className="flex justify-end mb-8 cursor-pointer"

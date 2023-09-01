@@ -7,20 +7,21 @@ const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isAnimating, setAnimating] = useState(false);
 
-  const handelSearchInput = (e) => {
+  const handleSearchInput = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const handelSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.length > 0) {
+      // Redirect to search results page with the search query
       navigate(`/search?query=${searchTerm}`);
+      // Clear the input field and reset search term
       document.querySelector("input").value = "";
       setSearchTerm("");
     } else {
-      // if input is empty animation to true
+      // If input is empty, trigger an animation to indicate the error
       setAnimating(true);
-
       // Reset animation after a brief delay
       setTimeout(() => {
         setAnimating(false);
@@ -37,7 +38,7 @@ const SearchForm = () => {
 
   return (
     <form
-      onSubmit={handelSubmit}
+      onSubmit={handleSubmit}
       className={`${
         isAnimating ? "animate-shake" : "animate-none"
       } relative w-full`}
@@ -45,8 +46,8 @@ const SearchForm = () => {
       <input
         className="input"
         type="text"
-        placeholder="search for a product ..."
-        onChange={handelSearchInput}
+        placeholder="Search for a product..."
+        onChange={handleSearchInput}
       />
       <button className="btn btn-accent absolute top-0 right-0 rounded-l-none sm:px-10 px-5">
         <FiSearch className="text-xl" />

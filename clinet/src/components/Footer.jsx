@@ -7,6 +7,7 @@ import {
   FaLinkedin,
   FaGithub,
 } from "react-icons/fa";
+
 const Footer = () => {
   return (
     <footer className="pt-16 px-5 bg-primary">
@@ -20,7 +21,7 @@ const Footer = () => {
             much more!
           </p>
         </div>
-        {/* form */}
+        {/* Newsletter form */}
         <form className="w-full max-w-3xl mx-auto flex flex-col md:flex-row gap-5 my-10">
           <input
             type="text"
@@ -29,19 +30,19 @@ const Footer = () => {
           />
           <button className="btn btn-accent min-w-[150px]">Join</button>
         </form>
-        {/* links */}
+        {/* Links */}
         <div className="text-white/60 flex flex-col sm:flex-row text-center gap-x-6 capitalize max-w-max mx-auto mb-9 flex-wrap">
           <a href="#" className="hover:text-white transition-all">
             Returns policy
           </a>
           <a href="#" className="hover:text-white transition-all">
-            Track your oreder
+            Track your order
           </a>
           <a href="#" className="hover:text-white transition-all">
             Shipping & delivery
           </a>
         </div>
-        {/* social */}
+        {/* Social icons */}
         <div className="flex mx-auto gap-x-6 max-w-max text-xl mb-16">
           <a href="#" className="hover:text-white transition-all">
             <FaYoutube />
@@ -63,7 +64,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      {/* copyright */}
+      {/* Copyright */}
       <div className="py-10 border-t border-t-white/10">
         <div className="container mx-auto">
           <div className="text-center text-sm text-white/60">

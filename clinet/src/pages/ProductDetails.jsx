@@ -4,6 +4,7 @@ import useFetch from "../hooks/useFetch";
 import RelatedProducts from "../components/RelatedProducts";
 import { CartContext } from "../context/CartContext";
 import { calculatePrice } from "../components/PriceUtils"; // Update the path to calculatePrice
+import { FaStar } from "react-icons/fa";
 
 const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
@@ -19,21 +20,26 @@ const ProductDetails = () => {
     return <div className="container mx-auto">Product not found</div>;
   }
 
+  // Extract data from the fetched product
+  const product = data[0];
   const imageUrl =
-    data[0].attributes?.image?.data?.attributes?.url || "placeholder_image_url";
-
+    product.attributes?.image?.data?.attributes?.url || "placeholder_image_url";
   const categoryTitle =
-    data[0].attributes?.categories?.data[0]?.attributes?.title ||
+    product.attributes?.categories?.data[0]?.attributes?.title ||
     "Unknown Category";
+  const cameraTitle = product.attributes.title;
+  const cameraPrice = product.attributes.price;
+  const cameraRate = product.attributes.rate;
+  const cameraReviewsCount = product.attributes.reviewscount;
 
-  const cameraTitle = data[0].attributes.title;
-  const cameraPrice = data[0].attributes.price;
+  // Calculate the discounted price using the calculatePrice function
   const discountedPrice = calculatePrice(
     cameraTitle,
     categoryTitle,
     cameraPrice
   );
 
+  // Define a function to determine the discount text
   const getDiscountText = () => {
     if (cameraTitle.includes("Canon")) {
       return "(15% off)";
@@ -61,23 +67,34 @@ const ProductDetails = () => {
             />
           </div>
           <div className="flex-1 bg-primary p-8 sm:p-12 xl:p-20 rounded-lg flex flex-col justify-center">
-            <div className=" uppercase text-accent text-base sm:text-lg font-medium mb-2">
+            <div className="uppercase text-accent text-base sm:text-lg font-medium mb-2">
               {categoryTitle} cameras
             </div>
             <h2 className="capitalize text-xl sm:text-3xl mb-4">
               {cameraTitle}
             </h2>
-            <p className="mb-12 text-sm">{data[0].attributes.description}</p>
+            <p className="mb-12 text-sm">{product.attributes.description}</p>
             <div className="text-center sm:text-left flex items-center justify-evenly sm:justify-normal gap-x-4">
-              <div className="sm:text-3xl t text-2xl text-accent font-semibold">
-                ${discountedPrice}
-                <span className="sm:text-2xl text-sm sm:ml-1 block sm:inline">
-                  {getDiscountText()}
-                </span>
+              <div className="flex flex-col sm:flex-row items-center sm:gap-x-3">
+                <div className="text-2xl xl:text-3xl text-accent font-semibold">
+                  ${discountedPrice}
+                  <span className="xl:text-2xl sm:text-xl text-sm sm:ml-1 block sm:inline">
+                    {getDiscountText()}
+                  </span>
+                </div>
+                {cameraReviewsCount && (
+                  <p className="text-accent text-xl xl:text-2xl flex items-center gap-x-1 font-semibold xl:mt-1">
+                    {cameraRate}
+                    <FaStar />
+                    <span className="xl:text-xl text-base sm:mt-1 font-medium">
+                      ({cameraReviewsCount})
+                    </span>
+                  </p>
+                )}
               </div>
               <button
                 onClick={() => addToCart(data, id)}
-                className="btn btn-accent min-w-fit text-xs px-2 sm:px-10 sm:text-sm "
+                className="btn btn-accent min-w-fit text-xs px-2 sm:px-10 sm:text-sm"
               >
                 Add to cart
               </button>
