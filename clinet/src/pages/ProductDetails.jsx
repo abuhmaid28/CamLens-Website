@@ -8,6 +8,7 @@ import { calculatePrice } from "../components/PriceUtils"; // Update the path to
 const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
   const { id } = useParams();
+
   const { data } = useFetch(`/products?populate=*&filters[id][$eq]=${id}`);
 
   if (!data) {
@@ -49,7 +50,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="mb-16 pt-44 lg:pt-8 xl:pt-0">
+    <div className="mb-16 pt-44 lg:pt-8 xl:pt-0 px-5">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 mb-8">
           <div className="flex-1 lg:max-w-[40%] lg:h-[540px] grad rounded-lg flex justify-center items-center">
@@ -59,20 +60,24 @@ const ProductDetails = () => {
               className="w-full max-w-[65%]"
             />
           </div>
-          <div className="flex-1 bg-primary p-12 xl:p-20 rounded-lg flex flex-col justify-center">
-            <div className="uppercase text-accent text-lg font-medium mb-2">
+          <div className="flex-1 bg-primary p-8 sm:p-12 xl:p-20 rounded-lg flex flex-col justify-center">
+            <div className=" uppercase text-accent text-base sm:text-lg font-medium mb-2">
               {categoryTitle} cameras
             </div>
-            <h2 className="h2 mb-4">{cameraTitle}</h2>
-            <p className="mb-12">{data[0].attributes.description}</p>
-            <div className="flex items-center gap-x-8">
-              <div className="text-3xl text-accent font-semibold">
+            <h2 className="capitalize text-xl sm:text-3xl mb-4">
+              {cameraTitle}
+            </h2>
+            <p className="mb-12 text-sm">{data[0].attributes.description}</p>
+            <div className="text-center sm:text-left flex items-center justify-evenly sm:justify-normal gap-x-4">
+              <div className="sm:text-3xl t text-2xl text-accent font-semibold">
                 ${discountedPrice}
-                <span className="text-2xl ml-1"> {getDiscountText()}</span>
+                <span className="sm:text-2xl text-sm sm:ml-1 block sm:inline">
+                  {getDiscountText()}
+                </span>
               </div>
               <button
                 onClick={() => addToCart(data, id)}
-                className="btn btn-accent"
+                className="btn btn-accent min-w-fit text-xs px-2 sm:px-10 sm:text-sm "
               >
                 Add to cart
               </button>

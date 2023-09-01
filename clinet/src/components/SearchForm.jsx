@@ -48,7 +48,7 @@ const SearchForm = () => {
         placeholder="search for a product ..."
         onChange={handelSearchInput}
       />
-      <button className="btn btn-accent absolute top-0 right-0 rounded-l-none">
+      <button className="btn btn-accent absolute top-0 right-0 rounded-l-none sm:px-10 px-5">
         <FiSearch className="text-xl" />
       </button>
     </form>

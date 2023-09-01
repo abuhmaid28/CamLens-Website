@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 
 const Home = () => {
   return (
-    <section>
+    <section className="xl:px-5 2xl:px-0  px-5 mt-7">
       <Hero />
       <LatestProducts />
       <OldProducts />

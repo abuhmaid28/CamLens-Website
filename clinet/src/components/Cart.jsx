@@ -31,7 +31,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="w-full h-full px-4 text-white">
+    <div className="w-full h-[90%] sm:h-full px-4 text-white">
       <div className="overflow-y-auto overflow-x-hidden h-3/4">
         {/* close icon */}
         <div
@@ -64,16 +64,16 @@ const Cart = () => {
       {/* buttons */}
       <div className="px-6 h-1/6">
         {cart.length >= 1 ? (
-          <div className="flex justify-between gap-x-4">
+          <div className="flex justify-between gap-x-4 mt-4 sm:mt-0">
             <button
               onClick={clearCart}
-              className="btn btn-accent hover:bg-accent-hover text-primary"
+              className="btn btn-accent min-w-fit text-xs px-2 sm:px-10 sm:text-sm w-2/5"
             >
               clear cart
             </button>
             <button
               onClick={handlePayment}
-              className="btn btn-accent hover:bg-accent-hover text-primary flex-1 px-2 gap-x-2"
+              className="btn btn-accent min-w-fit text-xs sm:text-sm flex-1 px-2 gap-x-2"
             >
               Checkout
               <IoArrowForward className="text-lg" />

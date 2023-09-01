@@ -77,34 +77,26 @@ const Search = () => {
   }
 
   return (
-    <div className="mb-8 pt-40 lg:pt-5 xl:pt-0 ">
+    <div className="mb-16 pt-40 lg:pt-0 px-5">
       <div className="container mx-auto">
-        {/* title */}
         {searchTerm && (
-          <div className="py-3 text-xl uppercase text-center lg:text-left ">
+          <div className="py-4 text-xl uppercase text-center md:text-left ">
             {data?.length > 0
               ? `${filteredData.length} results for ${searchTerm}`
               : `no result found for ${searchTerm}`}
           </div>
         )}
-        <div className="gap-x-8 grid grid-cols-12 ">
+        <div className="sm:gap-x-8 grid grid-cols-12 ">
           <div
             className={`flex flex-col gap-y-8 ${
-              (filteredData && filteredData.length % 4 === 0) ||
-              (filteredData && filteredData.length !== 0) ||
-              (filteredData && filteredData.length % 3 === 0) ||
               (filteredData &&
-                filteredData.length % 5 === 0 &&
-                filteredData &&
-                filteredData.length > 5) ||
-              (filteredData && filteredData.length === 7)
-                ? "col-span-2"
-                : "col-span-3"
+                (filteredData.length % 4 === 0 || filteredData.length === 7)) ||
+              (filteredData.length % 5 === 0 && filteredData.length > 5)
+                ? "xl:col-span-2 sm:col-span-3 col-span-12"
+                : "sm:col-span-3 col-span-12"
             } `}
           >
-            <CategoryNav />
-            {/* Filter Controls */}
-
+            <CategoryNav hide={"ProductsShow"} />
             <ProductFilters
               sortBy={sortBy}
               setSortBy={setSortBy}
@@ -115,34 +107,22 @@ const Search = () => {
             />
           </div>
           <main
-            className={`mx-auto w-full ${
-              (filteredData && filteredData.length % 4 === 0) ||
-              (filteredData && filteredData.length % 3 === 0) ||
-              (filteredData && filteredData.length % 5 === 0) ||
-              (filteredData && filteredData.length > 5)
-                ? "col-span-10"
-                : "col-span-9"
+            className={`flex flex-col gap-y-8 ${
+              (filteredData &&
+                (filteredData.length % 4 === 0 || filteredData.length === 7)) ||
+              (filteredData.length % 5 === 0 && filteredData.length > 5)
+                ? "xl:col-span-10 sm:col-span-9 col-span-12"
+                : "sm:col-span-9 col-span-12"
             }`}
           >
-            {/* Product grid */}
             <div
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 ${
-                (filteredData && filteredData.length % 4 === 0) ||
-                (filteredData && filteredData.length === 7)
+                filteredData &&
+                (filteredData.length % 4 === 0 || filteredData.length === 7)
                   ? "xl:grid-cols-4"
-                  : filteredData && filteredData.length === 2
+                  : filteredData.length === 2
                   ? "xl:grid-cols-2"
-                  : filteredData &&
-                    filteredData.length % 4 !== 0 &&
-                    filteredData &&
-                    filteredData.length % 3 !== 0 &&
-                    filteredData &&
-                    filteredData.length % 5 !== 0
-                  ? "xl:grid-cols-3"
-                  : filteredData &&
-                    filteredData.length % 5 === 0 &&
-                    filteredData &&
-                    filteredData.length > 5
+                  : filteredData.length % 5 === 0 && filteredData.length > 5
                   ? "xl:grid-cols-5"
                   : "xl:grid-cols-3"
               } `}
