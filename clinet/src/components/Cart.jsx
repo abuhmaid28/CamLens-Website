@@ -10,8 +10,9 @@ const Cart = () => {
   const { setIsOpen, cart, total, clearCart } = useContext(CartContext);
 
   // Load the Stripe API using a promise
-  const stripePromise = loadStripe("your_stripe_public_key_here");
-
+  const stripePromise = loadStripe(
+    "pk_test_51Nih4jJsuIt7aQPp0Um8mRhHUzsyXHLzQvhqwcfMRed1Y0iKBXJVvmWCacXgjVYc99SDdOFzAY3LBchMHm09BK6R00jtppncyX"
+  );
   // Handle the payment process
   const handlePayment = async () => {
     try {

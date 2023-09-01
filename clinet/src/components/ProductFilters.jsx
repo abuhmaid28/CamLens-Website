@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import { FaChevronCircleDown, FaChevronCircleUp } from "react-icons/fa";
 import { motion } from "framer-motion";
 
+// Define constants for filter options to avoid repetition
+const SORT_OPTIONS = [
+  { label: "A to Z", value: "aToZ" },
+  { label: "Z to A", value: "zToA" },
+];
+
+const PRICE_ORDER_OPTIONS = [
+  { label: "Low to High", value: "lowToHigh" },
+  { label: "High to Low", value: "highToLow" },
+];
+
 const ProductFilters = ({
   sortBy,
   setSortBy,
@@ -56,42 +67,23 @@ const ProductFilters = ({
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="bg-primary flex-1 flex flex-col gap-y-6 p-6 cursor-auto"
         >
-          <div className="flex flex-col gap-2">
-            <label className="font-semibold">Sort By:</label>
-            <div className="flex flex-col gap-1 ">
-              <SortCheckbox
-                label="A to Z"
-                value="aToZ"
-                checked={sortBy === "aToZ"}
-                onChange={handleSortByChange}
-              />
-              <SortCheckbox
-                label="Z to A"
-                value="zToA"
-                checked={sortBy === "zToA"}
-                onChange={handleSortByChange}
-              />
-            </div>
-          </div>
+          {/* Sort By */}
+          <FilterGroup
+            label="Sort By:"
+            options={SORT_OPTIONS}
+            selectedOption={sortBy}
+            onChange={handleSortByChange}
+          />
 
-          <div className="flex flex-col gap-2">
-            <label className="font-semibold">Price Order:</label>
-            <div className="flex flex-col gap-1">
-              <SortCheckbox
-                label="Low to High"
-                value="lowToHigh"
-                checked={priceOrder === "lowToHigh"}
-                onChange={handlePriceOrderChange}
-              />
-              <SortCheckbox
-                label="High to Low"
-                value="highToLow"
-                checked={priceOrder === "highToLow"}
-                onChange={handlePriceOrderChange}
-              />
-            </div>
-          </div>
+          {/* Price Order */}
+          <FilterGroup
+            label="Price Order:"
+            options={PRICE_ORDER_OPTIONS}
+            selectedOption={priceOrder}
+            onChange={handlePriceOrderChange}
+          />
 
+          {/* Is New */}
           <div className="flex flex-col gap-2">
             <label className="font-semibold">Is New:</label>
             <IsNewCheckbox
@@ -102,6 +94,26 @@ const ProductFilters = ({
           </div>
         </motion.div>
       )}
+    </div>
+  );
+};
+
+// Reusable component for filter groups
+const FilterGroup = ({ label, options, selectedOption, onChange }) => {
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="font-semibold">{label}</label>
+      <div className="flex flex-col gap-1">
+        {options.map((option) => (
+          <SortCheckbox
+            key={option.value}
+            label={option.label}
+            value={option.value}
+            checked={selectedOption === option.value}
+            onChange={onChange}
+          />
+        ))}
+      </div>
     </div>
   );
 };
